@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -19,10 +20,11 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         User::create(($request->all()));
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')
+        ->with('sucess', 'Usuario criado com sucesso!');
     }
 }
